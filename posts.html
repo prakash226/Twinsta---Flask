@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-dark" role="alert">
+    {{ message }}
+  </div>
+{% endfor %}
+
+<h1 style="color: yellow;">Your Feed</h1>
+<br/>
+
+{% for post in posts %}
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <h1>{{ post.title }}</h1><br/>
+    By: {{ post.poster.name }}<br/>
+    On: {{ post.date_posted }} | {{ post.slug }}<br/>
+    {{ post.content }}<br/>
+    <hr><br/>
+</div>    
+{% endfor %}
+
+
+
+{% endblock %}

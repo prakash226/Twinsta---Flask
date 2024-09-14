@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+<div class=" margin-top: 25px">
+    {% block content %}
+
+    {% for message in get_flashed_messages() %}
+
+        <div class="alert alert-dark" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+        <hr>
+    <div class="card margin-top: 25px">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">PROFILE</h2>
+            <p class="card-text mb-3" ><br/><br/>
+                <strong style="color: red;">Name: </strong><span style="color: purple;"><b>{{ current_user.name }}</b></span><br/>
+                <strong style="color: red;">Username:</strong><span style="color: purple;"> <b>{{ current_user.username }}</b></span><br/>
+                <strong style="color: red;">User ID:</strong><span style="color: purple;">  <b>{{ current_user.id }}</b></span><br/>
+                <strong style="color: red;">Email:</strong><span style="color: purple;">  <b>{{ current_user.email }}</b></span><br/>
+                <strong style="color: red;">Joined On:</strong><span style="color: purple;">  <b>{{ current_user.date_added }}</b></span><br/>
+            </p>
+                <a href="{{ url_for('add_post') }}" class="btn btn-primary" style="font-family: Arial, Helvetica, sans-serif;">POST</a>
+                <a href="{{ url_for('posts') }}" class="btn btn-primary" style="font-family: Arial, Helvetica, sans-serif;">FEED</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

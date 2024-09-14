@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-dark" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+{% if name %}
+    <h1 style="color: yellow;">User Added!</h1>
+    <br/><br/> 
+    {% for our_user in our_users %}
+        {{ our_user.id }}.<a href="{{ url_for('update', id=our_user.id)}}">  {{ our_user.name }}</a> - {{ our_user.email }} <a href="{{ url_for('delete', id=our_user.id) }}"> Delete </a><br/><br/>
+    {% endfor %}  
+{% else %}
+    <h1 style="color: yellow; text-align: center;">SIGN IN</h1>
+    <div class="row">
+        <!-- Left side for logo -->
+        <div class="col-md-6 text-center">
+            <img src="{{ url_for('static', filename='twinsta.png') }}" alt="Logo" class="img-fluid" style="max-width: 90%; height: auto;">
+        </div>
+
+        <!-- Right side for form -->
+        <div class="col-md-6">
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+                <br/>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+
+                    {{ form.name.label (class="form-label") }}
+                    {{ form.name (class="form-control") }}
+                    <br/>
+                    {{ form.username.label (class="form-label") }}
+                    {{ form.username (class="form-control") }}
+                    <br/>
+                    {{ form.email.label (class="form-label") }}
+                    {{ form.email (class="form-control") }}
+                    <br/>
+                    {{ form.password_hash.label (class="form-label") }}
+                    {{ form.password_hash (class="form-control") }}
+                    <br/>
+                    {{ form.confirm_password.label (class="form-label") }}
+                    {{ form.confirm_password (class="form-control") }}
+                    <br/>
+
+                    {{ form.submit (class="btn btn-dark") }}
+
+                    <a href="{{ url_for('login') }}" class="btn btn-secondary"> Already Have An Account? Sign Up</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <br/><br/><br/>
+    {% for our_user in our_users %}
+        {{ our_user.id }}.<a href="{{ url_for('update', id=our_user.id) }}"> {{ our_user.name }} </a> - {{ our_user.email }} - PW : {{ our_user.password_hash }} <a href="{{ url_for('delete', id=our_user.id) }}"> Delete </a><br/>
+    {% endfor %}    
+
+{% endif %}
+
+{% endblock %}
